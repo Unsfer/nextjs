@@ -3,21 +3,22 @@ import useSWR from 'swr';
 import { Menu } from 'semantic-ui-react';
 import fetcher from '../tools/fetcher';
 
-export default function Home() {
-  const { env } = useSWR(`/api/env`, fetcher);
+export default function Home(props) {
+  const { VK_APP_ID } = props;
+  if (!VK_APP_ID) {
+    return <div>No VK_APP_ID</div>;
+  }
 
   return (
     <Layout>
       <div>
-        MY VK APP
-        <pre>env = {JSON.stringify(env, null, 2)}</pre>
+        <pre>props = {JSON.stringify(props, null, 2)}</pre>
       </div>
     </Layout>
   )
 }
 
 export async function getServerSideProps(context) {
-  return {
-    props: {}, // will be passed to the page component as props
-  }
+  const { VK_APP_ID } = process.env;
+  return { props: { VK_APP_ID } };
 }
