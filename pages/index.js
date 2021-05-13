@@ -19,6 +19,6 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-  const { VK_APP_ID } = process.env;
+  const { VK_APP_ID = '' } = process.env;
   return { props: { VK_APP_ID } };
 }

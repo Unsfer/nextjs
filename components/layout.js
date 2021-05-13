@@ -14,6 +14,8 @@ export default function Layout({
 			<link rel="icon" href="/favicon.ico"/>
 			<link rel="stylesheet" type="text/css" href="/semantic.min.css"/>
 			<link rel="stylesheet" type="text/css" href="/index.css"/>
+
+			<script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
 		</Head>
 
 		<Menu fixed="top" inverted>
