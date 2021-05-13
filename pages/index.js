@@ -11,6 +11,7 @@ export default function Home() {
     <Layout>
       <div>
         MY VK APP
+        <pre>{JSON.stringify(process.env, null, 2)}</pre>
       </div>
     </Layout>
   )
