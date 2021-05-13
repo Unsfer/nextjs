@@ -4,14 +4,13 @@ import { Menu } from 'semantic-ui-react';
 import fetcher from '../tools/fetcher';
 
 export default function Home() {
-  const { data, error } = useSWR(`/api/test`, fetcher);
-  console.log({ data, error });
+  const { env } = useSWR(`/api/env`, fetcher);
 
   return (
     <Layout>
       <div>
         MY VK APP
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <pre>env = {JSON.stringify(env, null, 2)}</pre>
       </div>
     </Layout>
   )
