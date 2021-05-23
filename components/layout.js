@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Menu, Container } from 'semantic-ui-react';
+import { Menu, Container, Icon } from 'semantic-ui-react';
 
 export default function Layout({
   children,
@@ -24,7 +24,7 @@ export default function Layout({
 			<Container>
 				<Menu.Item header>VK app</Menu.Item>
 				{!!user && 
-					<Menu.Item position="right" icon="check">
+					<Menu.Item position="right">
 						{user.first_name} {user.last_name}
 					</Menu.Item>
 				}
