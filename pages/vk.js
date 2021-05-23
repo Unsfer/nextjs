@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Layout from '../components/layout';
 import useSWR from 'swr';
 import { Button } from 'semantic-ui-react';
@@ -9,14 +10,17 @@ export default function Home(props) {
     return <div>No VK_APP_ID</div>;
   }
 
-  const initVK = async () => {
-  	await VK.init({ apiId: VK_APP_ID });
+  const [vkAuthResponse, setVkAuthResponse] = useState(null);
 
-  	VK.Auth.login(function(...args) { console.log(...args); })
+  const initVK = async () => {
+    await VK.init({ apiId: VK_APP_ID });
+    VK.Auth.login(setVkAuthResponse);
   };
 
+  useEffect(initVK, []);
+
   return (
-    <Layout>
+    <Layout vkAuthResponse={vkAuthResponse}>
       <div>
         <pre>props = {JSON.stringify(props, null, 2)}</pre>
 

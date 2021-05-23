@@ -3,8 +3,10 @@ import { Menu, Container } from 'semantic-ui-react';
 
 export default function Layout({
   children,
+  vkAuthResponse,
   title = 'VK app',
 }) {
+  const { user } = vkAuthResponse?.session || {};
   return (
 	<div>
 		<Head>
@@ -21,6 +23,11 @@ export default function Layout({
 		<Menu fixed="top" inverted>
 			<Container>
 				<Menu.Item header>VK app</Menu.Item>
+				{!!user && 
+					<Menu.Item position="right" icon="check">
+						{user.first_name} {user.last_name}
+					</Menu.Item>
+				}
 			</Container>
 		</Menu>
 
