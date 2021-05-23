@@ -1,6 +1,6 @@
 import Layout from '../components/layout';
 import useSWR from 'swr';
-import { Menu } from 'semantic-ui-react';
+import { Message } from 'semantic-ui-react';
 import fetcher from '../tools/fetcher';
 
 export default function Home(props) {
@@ -11,12 +11,12 @@ export default function Home(props) {
 
   const url = 'https://showroom.hyundai.ru/rest/car?car_id=31';
   const { data, error } = useSWR(url, fetcher);
-  console.log({ url, data, error });
 
   return (
     <Layout>
       <div>
-        <pre>props = {JSON.stringify(props, null, 2)}</pre>
+        <pre>data = {JSON.stringify(data, null, 2)}</pre>
+        {error && <Message error visible content={error}/>}
       </div>
     </Layout>
   )

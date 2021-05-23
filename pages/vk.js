@@ -1,6 +1,6 @@
 import Layout from '../components/layout';
 import useSWR from 'swr';
-import { Menu } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import fetcher from '../tools/fetcher';
 
 export default function Home(props) {
@@ -9,14 +9,18 @@ export default function Home(props) {
     return <div>No VK_APP_ID</div>;
   }
 
-  const url = 'https://showroom.hyundai.ru/rest/car?car_id=31';
-  const { data, error } = useSWR(url, fetcher);
-  console.log({ url, data, error });
+  const initVK = async () => {
+  	await VK.init({ apiId: VK_APP_ID });
+
+  	VK.Auth.login(function(...args) { console.log(...args); })
+  };
 
   return (
     <Layout>
       <div>
         <pre>props = {JSON.stringify(props, null, 2)}</pre>
+
+        <Button primary onClick={initVK} content="Тест"/>
       </div>
     </Layout>
   )
