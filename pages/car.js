@@ -1,28 +1,23 @@
-import Layout from '../components/layout';
 import useSWR from 'swr';
 import { Message } from 'semantic-ui-react';
 import fetcher from '../tools/fetcher';
+import { Button } from 'semantic-ui-react';
+import Layout from '../components/Layout';
+import ModelsTable from '../components/ModelsTable';
 
 export default function Home(props) {
-  const { VK_APP_ID } = props;
-  if (!VK_APP_ID) {
-    return <div>No VK_APP_ID</div>;
-  }
-
-  const url = 'https://showroom.hyundai.ru/rest/car?car_id=31';
-  const { data, error } = useSWR(url, fetcher);
+  const { data, error } = useSWR('/api/monitor/data', fetcher);
 
   return (
     <Layout>
       <div>
-        <pre>data = {JSON.stringify(data, null, 2)}</pre>
         {error && <Message error visible content={error}/>}
+        {data && <div>
+          Всего запросов: {data.requestsCount}. Последний запрос: {data.lastRequestDate}.{' '}
+          <Button compact negative content="Перезапустить монитор"/>
+          <ModelsTable models={data.models}/>
+        </div>}
       </div>
     </Layout>
   )
-}
-
-export async function getServerSideProps(context) {
-  const { VK_APP_ID = '' } = process.env;
-  return { props: { VK_APP_ID } };
 }

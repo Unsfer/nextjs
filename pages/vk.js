@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import useSWR from 'swr';
 import { Button } from 'semantic-ui-react';
 import fetcher from '../tools/fetcher';
